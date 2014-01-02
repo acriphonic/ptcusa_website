@@ -1,4 +1,6 @@
 PtcusaWebsite::Application.routes.draw do
+
+
 	root 'static_pages#home'
 	match '/contact', to: 'static_pages#contact', via: 'get'  
 	match '/industrial_control', to: 'static_pages#industrial_control', via: 'get'
