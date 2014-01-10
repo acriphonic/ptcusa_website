@@ -1,0 +1,14 @@
+<div class="newsText">
+  <%= image_tag("downloadClip.png") %>
+  <p>Firmware version numbers and release dates are included in the file name as follows (Product_ProcVer_yymmdd.extn). Product is the product type, such as M10, Proc is the embedded processor target for the code, Ver is the version number, and yymmdd is the release date (year-month-day). </p>
+  <p>Firmware and host software is generally backwards-compatible. Where earlier hardware is incompatible, an alternative version is provided. If you have a complete control system with customized firmware for your application, you should contact us before attempting any upgrades. If you need more information about compatibility, please contact <a href="mailto:service@ptcusa.com">support@ptcusa.com</a>.</p>
+  <p>Your browser may open and display firmware files that are in ASCII format rather, than presenting a download dialog. To download these files, right-click on the link and select &quot;Save Link As...&quot; or &quot;Save Target As ...&quot;.</p>
+
+  <%= link_to 'New Download', new_download_path %>
+
+  <% @downloads.each do |download| %>
+    <%= download.name %>
+    <br><%= download.description %>
+    <br><%= link_to 'Show', download %><%= link_to 'Edit', edit_download_path(download) %><%= link_to 'Destroy', download, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+</div>

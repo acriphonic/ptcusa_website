@@ -1,12 +1,13 @@
-<a href="index.html"><%= image_tag("logo.png", class: "logo") %></a>
-<div id="nav">
-	<ul>
-		<a href="index.html"><li class="rollOver"><p>Home</p></li></a>
-    <a href="news.html"><li class="rollOver"><p>News</p></li></a>
-    <a href="products.html"><li class="rollOver"><p>Products</p></li></a>
-    <a href="downloads.html"> <li class="rollOver"><p>Downloads</p></li></a>
-    <a href="aboutUs.html"><li class="rollOver"><p>About Us</p></li></a>
-    <a href="contact.html"><li class="rollOver"><p>Contact</p></li></a>
-	</ul>
+<div id="header">
+	<%= link_to image_tag("logo.png", class: "logo"), root_path %>
+	<div id="navbar">
+		<ul>
+		<li><%= link_to "Home", root_path %></li>
+		<li><%= link_to "News", news_path %></li>
+		<li><%= link_to "Products", products_path %></li>
+		<li><%= link_to "Downloads", downloads_path %></li>
+		<li><%= link_to "About Us", about_us_path %></li>
+		<li><%= link_to "Contact", contact_path %></li>
+		</ul>
+	</div>
 </div>
-</br></br>

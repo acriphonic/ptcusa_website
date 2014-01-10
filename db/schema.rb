@@ -11,14 +11,59 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140102153148) do
+ActiveRecord::Schema.define(version: 20140110212023) do
+
+  create_table "applications", force: true do |t|
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "downloads", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "employees", force: true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.string   "email"
+    t.string   "picture"
+    t.text     "bio"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "features", force: true do |t|
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "news_updates", force: true do |t|
     t.string   "title"
     t.string   "location"
     t.date     "date"
-    t.text     "update"
+    t.text     "news"
     t.string   "picture"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "products", force: true do |t|
+    t.string   "name"
+    t.string   "picture"
+    t.string   "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "resources", force: true do |t|
+    t.string   "name"
+    t.string   "version"
+    t.string   "filepath"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -28,6 +73,7 @@ ActiveRecord::Schema.define(version: 20140102153148) do
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_digest"
   end
 
 end

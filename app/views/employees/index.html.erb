@@ -1,0 +1,18 @@
+<div class="newsText">
+  <%= image_tag("aboutusClip.png") %>
+  <p>Pyramid Technical Consultants, Inc. was established in 1986. The company serves customers in the USA and Europe from its base in Lexington,      Massachusetts, and through its subsidiary company in England (<a href="http://www.ptceurope.com/"><b>www.ptceurope.com</b></a>). In addition to full-time employees, Pyramid benefits from an extended team of electronic engineers, circuit layout designers and regular consultants, the latter based at Massachusetts Institute of Technology and Harvard University.</p>
+  <p>Pyramid provides instrument control systems for the medical, semiconductor equipment, physics research and biological research markets. The systems typically involve electronics hardware, embedded real-time software, and host system software drivers and applications. Our company's partciular specialization is in multichannel low-current measurement and detector system readout.</p>
+  <p>In addition to its range of products, Pyramid also offers engineering services in these market areas, typically producing hardware and software solutions tailored to a customers' exact requirements.</p>
+
+  <%= link_to 'Add New Employee', new_employee_path %><br><br>
+
+  <% @employees.each do |employee| %>
+    <%= employee.name %>
+    <br><%= employee.title %>
+    <br><%= employee.email %>
+    <br><%= image_tag(employee.picture, class: "employeeImage") %>
+    <br><%= employee.bio %>
+    <br><%= link_to 'Show', employee %><%= link_to 'Edit', edit_employee_path(employee) %><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <br><br>
+  <% end %>
+</div>

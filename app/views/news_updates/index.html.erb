@@ -1,0 +1,16 @@
+<div class="newsText">
+  <%= image_tag("newsClip.png") %>
+  <p>At Pyramid we are constantly developing our range of products and services. Watch this page for information on new products, product applications and software releases.</p>
+
+  <%= link_to 'Add a News Story', new_news_update_path %><br><br>
+
+  <% @news_updates.each do |news_update| %>
+    <div class="newsBox">
+      <div class="newsTitle"><%= news_update.title %></div>
+      <div class="newsDate"><%= news_update.date.to_s(:long)  %> in <%= news_update.location %></div>
+      <div class="column"><%= simple_format(news_update.news) %></div>
+      <div class="column"><br><%= image_tag(news_update.picture, class: "newsImage") %></div>
+      <div class="align-right"><%= link_to 'Show', news_update %> | <%= link_to 'Edit', edit_news_update_path(news_update) %> | <%= link_to 'Destroy', news_update, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+    </div>
+  <% end %>
+</div>
