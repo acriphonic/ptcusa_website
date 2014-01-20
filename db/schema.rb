@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140110212023) do
+ActiveRecord::Schema.define(version: 20140120014725) do
 
   create_table "applications", force: true do |t|
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "product_id"
   end
 
   create_table "downloads", force: true do |t|
@@ -40,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140110212023) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "product_id"
   end
 
   create_table "news_updates", force: true do |t|
@@ -66,7 +68,11 @@ ActiveRecord::Schema.define(version: 20140110212023) do
     t.string   "filepath"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "downloadable_id"
+    t.string   "downloadable_type"
   end
+
+  add_index "resources", ["downloadable_id", "downloadable_type"], name: "index_resources_on_downloadable_id_and_downloadable_type"
 
   create_table "users", force: true do |t|
     t.string   "name"

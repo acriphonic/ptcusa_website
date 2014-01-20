@@ -1,64 +1,46 @@
 class DownloadsController < ApplicationController
   before_action :set_download, only: [:show, :edit, :update, :destroy]
 
-  # GET /downloads
-  # GET /downloads.json
   def index
     @downloads = Download.all
   end
 
-  # GET /downloads/1
-  # GET /downloads/1.json
   def show
+    @download = Download.find(params[:id])
   end
 
-  # GET /downloads/new
   def new
     @download = Download.new
+    resource = @download.resources.build
   end
 
-  # GET /downloads/1/edit
   def edit
+    @download = Download.find(params[:id])
   end
 
-  # POST /downloads
-  # POST /downloads.json
   def create
     @download = Download.new(download_params)
-
-    respond_to do |format|
-      if @download.save
-        format.html { redirect_to @download, notice: 'Download was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @download }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @download.errors, status: :unprocessable_entity }
-      end
+    if @download.save
+      flash[:notice] = "Successfully created download."
+      redirect_to @download
+    else
+      render :action => 'new'
     end
   end
 
-  # PATCH/PUT /downloads/1
-  # PATCH/PUT /downloads/1.json
   def update
-    respond_to do |format|
-      if @download.update(download_params)
-        format.html { redirect_to @download, notice: 'Download was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @download.errors, status: :unprocessable_entity }
-      end
+    if @download.update(download_params)
+      flash[:notice] = "Successfully updated download."
+      redirect_to @download
+    else
+      render :action => 'edit'
     end
   end
 
-  # DELETE /downloads/1
-  # DELETE /downloads/1.json
   def destroy
     @download.destroy
-    respond_to do |format|
-      format.html { redirect_to downloads_url }
-      format.json { head :no_content }
-    end
+    flash[:notice] = 'Successfully destroyed download.'
+    redirect_to downloads_url
   end
 
   private
@@ -69,6 +51,6 @@ class DownloadsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def download_params
-      params.require(:download).permit(:name, :description)
+      params.require(:download).permit(:name, :description, resource_attributes: [:name, :version, :filepath, :_destroy])
     end
 end

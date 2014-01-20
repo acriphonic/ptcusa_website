@@ -1,7 +1,5 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Name:</strong>
+  <strong>Download Name:</strong>
   <%= @download.name %>
 </p>
 
@@ -10,5 +8,14 @@
   <%= @download.description %>
 </p>
 
+<ul>
+<% for resource in @download.resources %>
+	<li><%=h resource.name %></li>
+	<li><%=h resource.version %></li>
+	<li><%=h resource.filepath %></li>
+<% end %>
+</ul>
+
 <%= link_to 'Edit', edit_download_path(@download) %> |
+<%= link_to "Destroy", @survey, :confirm => 'Are you sure?', :method => :delete %> |
 <%= link_to 'Back', downloads_path %>

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @product.name %>
@@ -14,6 +12,24 @@
   <strong>Category:</strong>
   <%= @product.category %>
 </p>
+
+<ul>
+<% for application in @download.applications %>
+	<li><%=h application.description %></li>
+<% end %>
+</ul>
+<ul>
+<% for feature in @download.features %>
+	<li><%=h feature.description %></li>
+<% end %>
+</ul>
+<ul>
+<% for resource in @download.resources %>
+	<li><%=h resource.name %></li>
+	<li><%=h resource.version %></li>
+	<li><%=h resource.filepath %></li>
+<% end %>
+</ul>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

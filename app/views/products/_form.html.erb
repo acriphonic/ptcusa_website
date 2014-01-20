@@ -1,16 +1,5 @@
 <%= form_for(@product) do |f| %>
-  <% if @product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
-
-      <ul>
-      <% @product.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+  <%= f.error_messages %>
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
@@ -23,6 +12,19 @@
     <%= f.label :category %><br>
     <%= f.text_field :category %>
   </div>
+  <%= f.fields_for :applications do |builder| %>
+    <% render "application_fields", :f => builder %>
+  <% end %>
+  <%= link_to_add_fields "Add A Product Application", f, :applications %>
+  <%= f.fields_for :features do |builder| %>
+    <% render "feature_fields", :f => builder %>
+  <% end %>
+  <%= link_to_add_fields "Add A Product Feature", f, :features %>
+  <%= f.fields_for :resources do |builder| %>
+    <% render "resource_fields", :f => builder %>
+  <% end %>
+  <%= link_to_add_fields "Add A Downloadable File", f, :resources %>
+<% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
