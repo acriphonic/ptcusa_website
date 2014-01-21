@@ -1,19 +1,13 @@
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
-<script type="text/javascript" src="_javascript/mosaic.1.0.1.js"></script>
-<script src="_javascript/jquery.easing.1.3.js" type="text/javascript"></script>  
-<script src="_javascript/animatedMenu.js" type="text/javascript"></script>
-<!-- InstanceBeginEditable name="javascripts" -->
-<!-- InstanceEndEditable -->
-    <script type="text/javascript">  
-      
-      jQuery(function($){
-        $('.bar2').mosaic({
-          animation : 'slide'
-        });
-        });
-        
-    </script>
-<!-- end Javascript -->
+<% provide(:title, 'Products') %>
+
+<%= javascript_include_tag "mosaic.1.0.1" %>
+<script type="text/javascript">  
+	jQuery(function($){
+		$('.bar2').mosaic({
+			animation	:	'slide'
+		});
+	});
+</script>
 
 <div class="newsText">
   <h5><!-- InstanceBeginEditable name="Title" -->Products<!-- InstanceEndEditable --></h5>
@@ -28,8 +22,10 @@
               <ul class="dropdown">
                 <li><%= image_tag("beamdiag.png") %>
                   <ul class="sub_menu">
-                    <li><a href="products/BPM16-38.html">BPM16-38 Beam Position Monitor</a></li>
-                    <li><a href="products/IC128-25.html">IC128-25 Ionization Chamber</a></li>
+									<% @bd_products = @products.where(category: 'BeamlineDiagnostic') %>
+									<% @bd_products.each do |product| %>
+    								<li><%= link_to product.name, product_path(product) %></li>
+									<% end %>
                   </ul>
                 </li>
               </ul>
@@ -38,7 +34,10 @@
               <ul class="dropdown">
                 <li><%= image_tag("comm&control.png") %>
                   <ul class="sub_menu">
-                    <li><a href="products/A500.html">A500 Real-time loop controller</a></li>
+                  <% @cc_products = @products.where(category: 'Communications&Control') %>
+                  <% @cc_products.each do |product| %>
+                    <li><%= link_to product.name, product_path(product) %></li>
+                  <% end %>
                   </ul>
                 </li>
               </ul>
@@ -47,10 +46,10 @@
               <ul class="dropdown">
                 <li><%= image_tag("genpurpose.png") %>
                   <ul class="sub_menu">
-                    <li><a href="products/B10.html">B10 Digital Device Interface</a></li>
-                    <li><a href="products/M10.html">M10 Universal Device Interface</a></li>
-                    <li><a href="products/N2400.html">N2400 Pneumatic Actuator Controller</a></li>
-                    <li><a href="products/S100.html">S100 Fiber-optic to RS-232 adaptor</a></li>
+                  <% @gp_products = @products.where(category: 'GeneralPurposeI/O') %>
+                  <% @gp_products.each do |product| %>
+                    <li><%= link_to product.name, product_path(product) %></li>
+                  <% end %>
                   </ul>
                 </li>
               </ul>
@@ -59,14 +58,10 @@
               <ul class="dropdown">
                 <li><%= image_tag("F3200small.png") %>
                   <ul class="sub_menu">
-                    <li><a href="products/F100.html">F100 1-channel I-V amplifier</a></li>
-                    <li><a href="products/F3200.html">F3200 32-channel I-V amplifier</a></li>
-                    <li><a href="products/F3200E.html">F3200E Fast 32 channel I-V amplifier</a></li>
-                    <li><a href="products/IC101.html">IC101 1-channel charge integrator</a></li>
-                    <li><a href="products/I200.html">I200 2-channel charge integrator</a></li>
-                    <li><a href="products/I400.html">I400 4-channel biased charge integrator </a></li>
-                    <li><a href="products/I404.html">I404 4-channel charge integrator</a></li>
-                    <li><a href="products/I3200.html">I3200 32-channel charge integrator</a></li>
+                  <% @cm_products = @products.where(category: 'CurrentMeasurement') %>
+                  <% @cm_products.each do |product| %>
+                    <li><%= link_to product.name, product_path(product) %></li>
+                  <% end %>
                   </ul>
                 </li>
               </ul>
@@ -75,8 +70,10 @@
               <ul class="dropdown">
                 <li><%= image_tag("D10small.png") %>
                   <ul class="sub_menu">
-                    <li><a href="products/C400.html">C400 Quad pulse counting detector controller</a></li>
-                    <li><a href="products/CP10.html">CP10 Fast Pre-amplifiers</a></li>
+                  <% @pac_products = @products.where(category: 'PulseAnalysis&Counting') %>
+                  <% @pac_products.each do |product| %>
+                    <li><%= link_to product.name, product_path(product) %></li>
+                  <% end %>
                   </ul>
                 </li>
               </ul>
@@ -85,7 +82,10 @@
               <ul class="dropdown">
                 <li> <%= image_tag("H10small.png") %>
                   <ul class="sub_menu">
-                    <li><a href="products/H10.html">H10 Integrated B / Bdot Magnetic Field Sensor</a></li>
+                  <% @mfm_products = @products.where(category: 'MagneticFieldMeasurement') %>
+                  <% @mfm_products.each do |product| %>
+                    <li><%= link_to product.name, product_path(product) %></li>
+                  <% end %>
                   </ul>
                 </li>
               </ul>
@@ -94,11 +94,10 @@
               <ul class="dropdown">
                 <li><%= image_tag("FiberOpticssmall.png") %>
                   <ul class="sub_menu">
-                    <li><a href="products/X14.html">X14 Optical Fanout</a></li>
-                    <li><a href="products/X44.html">X44 Optical Repeater</a></li>
-                    <li><a href="products/PD8.html">PD8 Power Supply Unit</a></li>
-                    <li><a href="products/Fiberoptics.html">Fiber Optical Cable Assemblies</a></li>
-                    <li><a href="products/DIN.html">DIN rail mounting brackets</a></li>
+                  <% @acc_products = @products.where(category: 'Accessories') %>
+                  <% @acc_products.each do |product| %>
+                    <li><%= link_to product.name, product_path(product) %></li>
+                  <% end %>
                   </ul>
                 </li>
               </ul>
@@ -125,10 +124,3 @@
 </div>
 
 <%= link_to 'New Product', new_product_path %>
-
-<% @products.each do |product| %>
-  <%= product.name %>
-  <br><%= product.picture %>
-  <br><%= product.category %>
-  <br><%= link_to 'Show', product %><%= link_to 'Edit', edit_product_path(product) %><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>

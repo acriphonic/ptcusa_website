@@ -1,31 +1,37 @@
 <%= form_for(@product) do |f| %>
-  <%= f.error_messages %>
+
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+
   <div class="field">
     <%= f.label :picture %><br>
     <%= f.text_field :picture %>
   </div>
+
   <div class="field">
     <%= f.label :category %><br>
-    <%= f.text_field :category %>
+		<%= f.select :category, options_for_select(%w[BeamlineDiagnostic Communications&Control GeneralPurposeI/O CurrentMeasurement PulseAnalysis&Counting MagneticFieldMeasurement Accessories]) %>
   </div>
+
   <%= f.fields_for :applications do |builder| %>
-    <% render "application_fields", :f => builder %>
+    <% render "application_fields", f: builder %>
   <% end %>
   <%= link_to_add_fields "Add A Product Application", f, :applications %>
+	</br>
   <%= f.fields_for :features do |builder| %>
-    <% render "feature_fields", :f => builder %>
+    <% render "feature_fields", f: builder %>
   <% end %>
   <%= link_to_add_fields "Add A Product Feature", f, :features %>
+	</br>
   <%= f.fields_for :resources do |builder| %>
-    <% render "resource_fields", :f => builder %>
+    <% render "resource_fields", f: builder %>
   <% end %>
   <%= link_to_add_fields "Add A Downloadable File", f, :resources %>
-<% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>

@@ -14,6 +14,4 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-//= require animatedMenu
-//= require jquery.easing.1.3
 //= require mosaic.1.0.1

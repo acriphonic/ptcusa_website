@@ -6,7 +6,6 @@ class DownloadsController < ApplicationController
   end
 
   def show
-    @download = Download.find(params[:id])
   end
 
   def new
@@ -15,7 +14,6 @@ class DownloadsController < ApplicationController
   end
 
   def edit
-    @download = Download.find(params[:id])
   end
 
   def create
@@ -51,6 +49,6 @@ class DownloadsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def download_params
-      params.require(:download).permit(:name, :description, resource_attributes: [:name, :version, :filepath, :_destroy])
+      params.require(:download).permit(:name, :description, resource_attributes: [:id, :name, :version, :filepath, :_destroy])
     end
 end
