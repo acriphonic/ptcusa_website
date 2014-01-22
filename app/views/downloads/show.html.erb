@@ -8,16 +8,9 @@
   <%= @download.description %>
 </p>
 
-<%= @download.resources %>
-<% @download.resources do |r| %>
-<%= r.name %>
-<% end %>
-
 <ul>
 <% for resource in @download.resources %>
-	<li><%= resource.name %></li>
-	<li><%= resource.version %></li>
-	<li><%= resource.filepath %></li>
+	<li>Filename: <%= resource.name %> / Version: <%= resource.version %> / Filepath: <%= resource.filepath %></li>
 <% end %>
 </ul>
 

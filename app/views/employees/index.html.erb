@@ -4,15 +4,19 @@
   <p>Pyramid provides instrument control systems for the medical, semiconductor equipment, physics research and biological research markets. The systems typically involve electronics hardware, embedded real-time software, and host system software drivers and applications. Our company's partciular specialization is in multichannel low-current measurement and detector system readout.</p>
   <p>In addition to its range of products, Pyramid also offers engineering services in these market areas, typically producing hardware and software solutions tailored to a customers' exact requirements.</p>
 
-  <%= link_to 'Add New Employee', new_employee_path %><br><br>
+  <center><%= link_to 'Add New Employee', new_employee_path %></center>
+  <br><br>
 
+<div class="columnize">
   <% @employees.each do |employee| %>
-    <%= employee.name %>
-    <br><%= employee.title %>
-    <br><%= employee.email %>
-    <br><%= image_tag(employee.picture, class: "employeeImage") %>
-    <br><%= employee.bio %>
-    <br><%= link_to 'Show', employee %><%= link_to 'Edit', edit_employee_path(employee) %><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <br><br>
+    <div class="employeeBox">
+      <%= image_tag(employee.picture, class: "employeeImage") %>
+      <strong><%= employee.name %>, <em><%= employee.title %></em></strong>
+      <br><i><%= employee.email %></i>
+      <br><br><%= employee.bio %>
+      <div class="align-right"><%= link_to 'Show', employee %> | <%= link_to 'Edit', edit_employee_path(employee) %> | <%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+    </div>
   <% end %>
+</div>
+
 </div>

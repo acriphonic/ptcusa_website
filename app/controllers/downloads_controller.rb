@@ -27,7 +27,7 @@ class DownloadsController < ApplicationController
   end
 
   def update
-    if @download.update(download_params)
+    if @download.update_attributes(download_params)
       flash[:notice] = "Successfully updated download."
       redirect_to @download
     else
@@ -49,6 +49,6 @@ class DownloadsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def download_params
-      params.require(:download).permit(:name, :description, resource_attributes: [:id, :name, :version, :filepath, :_destroy])
+      params.require(:download).permit(:name, :description, resources_attributes: [:downloadable_id, :name, :version, :filepath, :_destroy])
     end
 end
