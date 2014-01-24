@@ -1,6 +1,0 @@
-<% @resources.each do |resource| %>
-    <%= resource.name %>
-    <br><%= resource.name %>
-    <br><%= link_to 'Show', resource %><%= link_to 'Edit', edit_resource_path(resource) %><%= link_to 'Destroy', resource, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <br><br>
-  <% end %>

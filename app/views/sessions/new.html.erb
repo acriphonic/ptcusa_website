@@ -1,12 +1,21 @@
-<% provide(:title, "Sign in") %>
-<h1>Sign in</h1>
+<% provide(:title, "Admin Portal") %>
+
+<h1>Admin Portal</h1>
+<% if signed_in? %>
+	<p>You are currently signed in. You have access to the following:</p>
+	<%= link_to "Change Your Password", edit_user_path(current_user) %>
+	<br><%= link_to "Manage All Admin Accounts", users_path %>
+	<br><br><%= link_to "Sign out", signout_path, method: "delete" %>
+<% else %>
+	<p>You are not currently signed in.</p>
     <%= form_for(:session, url: sessions_path) do |f| %>
 
-      <%= f.label :name %>
-      <%= f.text_field :name %>
+      <%= f.label :name %><br>
+      <%= f.text_field :name %><br>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-
+      <%= f.label :password %><br>
+      <%= f.password_field :password %><br>
+      <br>
       <%= f.submit "Sign in" %>
     <% end %>
+<% end %>

@@ -19,7 +19,7 @@ PtcusaWebsite::Application.routes.draw do
 	resources :sessions, only: [:new, :create, :destroy]	
 	root 'static_pages#home'
 	match '/news', to: 'news_updates#index', via: 'get'
-	match '/signin',  to: 'sessions#new', via: 'get'
+	match '/admin_portal',  to: 'sessions#new', via: 'get'
 	match '/signout', to: 'sessions#destroy', via: 'delete'
 	match '/contact', to: 'static_pages#contact', via: 'get'
 	match '/about_us', to: 'employees#index', via: 'get'  

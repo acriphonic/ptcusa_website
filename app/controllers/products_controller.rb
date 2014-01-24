@@ -1,11 +1,13 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :signed_in_user, only: [:edit, :update, :destroy, :create]
 
   def index
     @products = Product.all
   end
 
   def show
+    @products = Product.all
   end
 
   def new

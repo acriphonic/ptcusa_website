@@ -1,90 +1,32 @@
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
-<script type="text/javascript" src="_javascript/mosaic.1.0.1.js"></script>
-<script src="_javascript/jquery.easing.1.3.js" type="text/javascript"></script>  
-<script src="_javascript/animatedMenu.js" type="text/javascript"></script>
-<!-- InstanceBeginEditable name="javascripts" -->
+<script type="text/javascript" src="javascript/SpryDOMUtils.js"></script>
+<script type="text/javascript" src="javascript/SpryDOMEffects.js"></script>
+<script type="text/javascript" src="javascript/SpryWidget.js"></script>
+<script type="text/javascript" src="javascript/SpryPanelSet.js"></script>
+<script type="text/javascript" src="javascript/SpryPanelSelector.js"></script>
+<script type="text/javascript" src="javascript/SpryTabbedPanels2.css"></script>
+<script type="text/javascript" src="javascript/SpryTabbedPanels2.js"></script>
+<script type="text/javascript" src="javascript/SpryTabbedPanelsKeyNavigationPlugin.js"></script>
 
-<script type="text/javascript" src="_javascript/SpryDOMUtils.js"></script>
-<script type="text/javascript" src="_javascript/SpryDOMEffects.js"></script>
-<script type="text/javascript" src="_javascript/SpryWidget.js"></script>
-<script type="text/javascript" src="_javascript/SpryPanelSet.js"></script>
-<script type="text/javascript" src="_javascript/SpryPanelSelector.js"></script>
-<script type="text/javascript" src="_javascript/SpryTabbedPanels2.css"></script>
-<script type="text/javascript" src="_javascript/SpryTabbedPanels2.js"></script>
-<script type="text/javascript" src="_javascript/SpryTabbedPanelsKeyNavigationPlugin.js"></script>
-<script type="text/xml">
-<!--
-<oa:widgets>
-  <oa:widget wid="2138522" binding="#SimpleTabs" />
-</oa:widgets>
--->
-</script>
-<!-- InstanceEndEditable -->
-    <script type="text/javascript">  
-      
-      jQuery(function($){
-        $('.bar2').mosaic({
-          animation : 'slide'
-        });
-        });
-        
-    </script>
- 
-
-<!-- end Javascript -->
-
-<!-- HTML -->
-
-<style type="text/css">
-    
-      /*Demo Styles*/
-            
-          .details{ margin-right: auto; margin-left: auto;}
-    
-</style>
-<script type="text/javascript">
-// BeginOAWidget_Instance_2138522: #SimpleTabs
-
-    var SimpleTabs = new Spry.Widget.TabbedPanels2("SimpleTabs", {
-      load: function(event, ui){
-          handleload(ui);
-        },
-      injectionType: "replace",
-      widgetID: "SimpleTabs",
-      autoPlay: false,
-      defaultTab: 0,
-      enableKeyboardNavigation: true,
-      hideHeader: false,
-      tabsPosition: "left",
-      event:"click",
-      stopOnUserAction: true,
-      displayInterval: 5000,
-      minDuration: 300,
-      maxDuration: 500,
-      stoppedMinDuration: 100,
-      stoppedMaxDuration: 200,
-      plugIns:[]
-    });
-
-// EndOAWidget_Instance_2138522
-</script>
+<% provide(:title, 'Downloads') %>
 
 <div class="newsText">
-  <%= image_tag("downloadClip.png") %>
+  <%= image_tag("layout/downloadClip.png") %>
   <p>Firmware version numbers and release dates are included in the file name as follows (Product_ProcVer_yymmdd.extn). Product is the product type, such as M10, Proc is the embedded processor target for the code, Ver is the version number, and yymmdd is the release date (year-month-day). </p>
   <p>Firmware and host software is generally backwards-compatible. Where earlier hardware is incompatible, an alternative version is provided. If you have a complete control system with customized firmware for your application, you should contact us before attempting any upgrades. If you need more information about compatibility, please contact <a href="mailto:service@ptcusa.com">support@ptcusa.com</a>.</p>
   <p>Your browser may open and display firmware files that are in ASCII format rather, than presenting a download dialog. To download these files, right-click on the link and select &quot;Save Link As...&quot; or &quot;Save Target As ...&quot;.</p>
 
-  <center><%= link_to 'New Download', new_download_path %></center>
+  <% if signed_in? %><center><%= link_to 'New Download', new_download_path %></center><% end %>
 
   <div class="VTabbedPanels" id="SimpleTabs">
     <div class="TabbedPanelsTabGroup">
-      <% @downloads.tap do |head, *body, tail| %>
-        <div class="TabbedPanelsTab TabbedPanelsTabFirst TabbedPanelsTabSelected"><%= link_to head.name "#" %></div>
-        <% body.each do |segment| %>
-          <div class="TabbedPanelsTab TabbedPanelsTabFirst TabbedPanelsTabSelected"><%= link_to segment.name "#" %></div>
+      <% @downloads.each_with_index do |download, index| %>
+        <% if index == 0 %>
+          <div class="TabbedPanelsTab TabbedPanelsTabFirst TabbedPanelsTabSelected"><a href="#"><%= download.name %></a></div>
+        <% elsif index == @downloads.size - 1 %>
+          <div class="TabbedPanelsTab TabbedPanelsTabLast PanelSelectorButtonUnselected"><a href="#"><%= download.name %></a></div>
+        <% else %>
+          <div class="TabbedPanelsTab TabbedPanelsTabFirst TabbedPanelsTabSelected"><a href="#"><%= download.name %></a></div>
         <% end %>
-        <div class="TabbedPanelsTab TabbedPanelsTabLast PanelSelectorButtonUnselected"><%= link_to tail.name "#" %></div>
       <% end %>
     </div>
     <div class="TabbedPanelsContentGroup">
@@ -97,25 +39,44 @@
             <h2><%= download.name %></h2>
             <table width="100%" border="1" cellpadding="2" cellspacing="2" bordercolor="#ccc">
             <tbody>
-              <tr><td colspan="2"><%= simple_format(download.description) %></td></tr>
-              <tr><td colspan="2">&nbsp;</td></tr>
+              <tr><td colspan="3"><%= simple_format(download.description) %></td></tr>
               <tr>
-                <% for resource in @download.resources %>
+                <% for resource in download.resources %>
                   <td>Name: <%= resource.name %></td>
                   <td>Filepath: <%= resource.filepath%></td>
                   <td>Version: <%= resource.version %></td>
-              </tr>
-              <tr>
-                <td><%= link_to 'Show', download %><%= link_to 'Edit', edit_download_path(download) %><%= link_to 'Destroy', download, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-              </tr>
-              <tr>
-                <td colspan="2">&nbsp;</td>
+                <% end %>
               </tr>
             </tbody>
             </table>
-            <p>&nbsp;</p>
+              <% if signed_in? %><div class="align-right"><%= link_to 'Edit', edit_download_path(download) %> | <%= link_to 'Destroy', download, method: :delete, data: { confirm: 'Are you sure?' } %></div><% else %><br><% end %>
           </div>
       <% end %>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+// BeginOAWidget_Instance_2138522: #SimpleTabs
+  var SimpleTabs = new Spry.Widget.TabbedPanels2("SimpleTabs", {
+    load: function(event, ui){
+        handleload(ui);
+      },
+    injectionType: "replace",
+    widgetID: "SimpleTabs",
+    autoPlay: false,
+    defaultTab: 0,
+    enableKeyboardNavigation: true,
+    hideHeader: false,
+    tabsPosition: "left",
+    event:"click",
+    stopOnUserAction: true,
+    displayInterval: 5000,
+    minDuration: 300,
+    maxDuration: 500,
+    stoppedMinDuration: 100,
+    stoppedMaxDuration: 200,
+    plugIns:[]
+  });
+// EndOAWidget_Instance_2138522
+</script>  

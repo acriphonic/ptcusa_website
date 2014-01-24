@@ -1,35 +1,135 @@
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
+<% provide(:title, 'Product - ' + @product.name) %>
 
-<p>
-  <strong>Picture:</strong>
-  <%= @product.picture %>
-</p>
+<div class="newsText">
+  <h5>Products</h5>
+  <table width="100%" border="0" id="prodContainer">
+    <tr>
+      <td style="padding-top: 15px;"><%= image_tag("layout/bracketLeft.png", style: "height:140px")%></td>
+      <td>
+        <table width="100%" border="0" id="prodGroup">
+          <tr style="text-align:center;">
+            <td>
+              <ul class="dropdown">
+                <li><%= image_tag("layout/beamdiag.png") %>
+                  <ul class="sub_menu">
+                  <% @bd_products = @products.where(category: 'BeamlineDiagnostic') %>
+                  <% @bd_products.each do |product| %>
+                    <li><%= link_to product.name, product_path(product) %></li>
+                  <% end %>
+                  </ul>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="dropdown">
+                <li><%= image_tag("layout/comm&control.png") %>
+                  <ul class="sub_menu">
+                  <% @cc_products = @products.where(category: 'Communications&Control') %>
+                  <% @cc_products.each do |product| %>
+                    <li><%= link_to product.name, product_path(product) %></li>
+                  <% end %>
+                  </ul>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="dropdown">
+                <li><%= image_tag("layout/genpurpose.png") %>
+                  <ul class="sub_menu">
+                  <% @gp_products = @products.where(category: 'GeneralPurposeI/O') %>
+                  <% @gp_products.each do |product| %>
+                    <li><%= link_to product.name, product_path(product) %></li>
+                  <% end %>
+                  </ul>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="dropdown">
+                <li><%= image_tag("layout/F3200small.png") %>
+                  <ul class="sub_menu">
+                  <% @cm_products = @products.where(category: 'CurrentMeasurement') %>
+                  <% @cm_products.each do |product| %>
+                    <li><%= link_to product.name, product_path(product) %></li>
+                  <% end %>
+                  </ul>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="dropdown">
+                <li><%= image_tag("layout/D10small.png") %>
+                  <ul class="sub_menu">
+                  <% @pac_products = @products.where(category: 'PulseAnalysis&Counting') %>
+                  <% @pac_products.each do |product| %>
+                    <li><%= link_to product.name, product_path(product) %></li>
+                  <% end %>
+                  </ul>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="dropdown">
+                <li> <%= image_tag("layout/H10small.png") %>
+                  <ul class="sub_menu">
+                  <% @mfm_products = @products.where(category: 'MagneticFieldMeasurement') %>
+                  <% @mfm_products.each do |product| %>
+                    <li><%= link_to product.name, product_path(product) %></li>
+                  <% end %>
+                  </ul>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="dropdown">
+                <li><%= image_tag("layout/FiberOpticssmall.png") %>
+                  <ul class="sub_menu">
+                  <% @acc_products = @products.where(category: 'Accessories') %>
+                  <% @acc_products.each do |product| %>
+                    <li><%= link_to product.name, product_path(product) %></li>
+                  <% end %>
+                  </ul>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td style="padding-top: 15px;"><%= image_tag("layout/bracketRight.png", style: "height:140px")%></td>
+    </tr>
+  </table>
 
-<p>
-  <strong>Category:</strong>
-  <%= @product.category %>
-</p>
+  <style type="text/css">
+  h2 {
+    color: #FFF !important;;
+    }
+  </style>
 
-<ul>
-<% for application in @download.applications %>
-	<li><%=h application.description %></li>
-<% end %>
-</ul>
-<ul>
-<% for feature in @download.features %>
-	<li><%=h feature.description %></li>
-<% end %>
-</ul>
-<ul>
-<% for resource in @download.resources %>
-	<li><%=h resource.name %></li>
-	<li><%=h resource.version %></li>
-	<li><%=h resource.filepath %></li>
-<% end %>
-</ul>
+  <h2><%= @product.name %></h2>
+  <p><strong>Category: </strong><%= @product.category %></p>
+  <div class="productDescrip">
+    <%= image_tag "products/" + @product.picture %>
+    <h4>Features</h4>
+    <ul>
+      <% for feature in @product.features %>
+        <li><%=h feature.description %></li>
+      <% end %>
+    </ul>
+    <h4>Applications</h4>
+    <ul type="disc">
+      <% for application in @product.applications %>
+        <li><%=h application.description %></li>
+      <% end %>
+    </ul>
+    <h4>Downloads</h4>
+    <% for resource in @product.resources %>
+      <p><%=h resource.name %>:&nbsp;<%= link_to resource.filepath %>&nbsp;<%=h resource.version %></p>
+    <% end %>
+  </div>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+  <% if signed_in? %><center><br>
+    <%= link_to 'Edit', edit_product_path(@product) %> |
+    <%= link_to "Destroy", @product, :confirm => 'Are you sure?', :method => :delete %> |
+    <%= link_to 'Back', products_path %>
+  </center><% end %>
+</div>

@@ -1,26 +1,16 @@
 <% provide(:title, 'Products') %>
 
-<%= javascript_include_tag "mosaic.1.0.1" %>
-<script type="text/javascript">  
-	jQuery(function($){
-		$('.bar2').mosaic({
-			animation	:	'slide'
-		});
-	});
-</script>
-
 <div class="newsText">
-  <h5><!-- InstanceBeginEditable name="Title" -->Products<!-- InstanceEndEditable --></h5>
-  <!-- InstanceBeginEditable name="Banner" --><!-- InstanceEndEditable -->
+  <h5>Products</h5>
   <table width="100%" border="0" id="prodContainer">
     <tr>
-      <td style="padding-top: 15px;"><%= image_tag("bracketLeft.png", style: "height:140px")%></td>
+      <td style="padding-top: 15px;"><%= image_tag("layout/bracketLeft.png", style: "height:140px")%></td>
       <td>
         <table width="100%" border="0" id="prodGroup">
           <tr style="text-align:center;">
             <td>
               <ul class="dropdown">
-                <li><%= image_tag("beamdiag.png") %>
+                <li><%= image_tag("layout/beamdiag.png") %>
                   <ul class="sub_menu">
 									<% @bd_products = @products.where(category: 'BeamlineDiagnostic') %>
 									<% @bd_products.each do |product| %>
@@ -32,7 +22,7 @@
             </td>
             <td>
               <ul class="dropdown">
-                <li><%= image_tag("comm&control.png") %>
+                <li><%= image_tag("layout/comm&control.png") %>
                   <ul class="sub_menu">
                   <% @cc_products = @products.where(category: 'Communications&Control') %>
                   <% @cc_products.each do |product| %>
@@ -44,7 +34,7 @@
             </td>
             <td>
               <ul class="dropdown">
-                <li><%= image_tag("genpurpose.png") %>
+                <li><%= image_tag("layout/genpurpose.png") %>
                   <ul class="sub_menu">
                   <% @gp_products = @products.where(category: 'GeneralPurposeI/O') %>
                   <% @gp_products.each do |product| %>
@@ -56,7 +46,7 @@
             </td>
             <td>
               <ul class="dropdown">
-                <li><%= image_tag("F3200small.png") %>
+                <li><%= image_tag("layout/F3200small.png") %>
                   <ul class="sub_menu">
                   <% @cm_products = @products.where(category: 'CurrentMeasurement') %>
                   <% @cm_products.each do |product| %>
@@ -68,7 +58,7 @@
             </td>
             <td>
               <ul class="dropdown">
-                <li><%= image_tag("D10small.png") %>
+                <li><%= image_tag("layout/D10small.png") %>
                   <ul class="sub_menu">
                   <% @pac_products = @products.where(category: 'PulseAnalysis&Counting') %>
                   <% @pac_products.each do |product| %>
@@ -80,7 +70,7 @@
             </td>
             <td>
               <ul class="dropdown">
-                <li> <%= image_tag("H10small.png") %>
+                <li> <%= image_tag("layout/H10small.png") %>
                   <ul class="sub_menu">
                   <% @mfm_products = @products.where(category: 'MagneticFieldMeasurement') %>
                   <% @mfm_products.each do |product| %>
@@ -92,7 +82,7 @@
             </td>
             <td>
               <ul class="dropdown">
-                <li><%= image_tag("FiberOpticssmall.png") %>
+                <li><%= image_tag("layout/FiberOpticssmall.png") %>
                   <ul class="sub_menu">
                   <% @acc_products = @products.where(category: 'Accessories') %>
                   <% @acc_products.each do |product| %>
@@ -105,10 +95,12 @@
           </tr>
         </table>
       </td>
-      <td style="padding-top: 15px;"><%= image_tag("bracketRight.png", style: "height:140px")%></td>
+      <td style="padding-top: 15px;"><%= image_tag("layout/bracketRight.png", style: "height:140px")%></td>
     </tr>
   </table>
-  <!-- InstanceBeginEditable name="Product Description" -->
+
+  <% if signed_in? %><center><br><%= link_to 'New Product', new_product_path %></center><% end %>
+
   <p>The wider range of Pyramid electronic devices is suited to applications in research, industrial control, semiconductor processing and medical therapy.  On-board signal conditioning, digitization, and calibration allow systems to be assembled with the minimum amount of additional equipment.  The use of fast, flexible and robust deterministic fiber-optic communications links allows the user to form an integrated system that can be distributed over a large facility.  Fiber-optics provide excellent noise-immunity over long cable runs and are able to cross high voltage gaps without problems.   Real-time controllers with up to ten loop ports allow the optimum balance of speed and capacity: up to 15 devices can be connected on each loop if needed.  Many devices include other interfaces such as RS-232, RS-485, USB and Ethernet.</p>
   <p>The latest G2 device family provides Ethernet communications, large on-board data buffers and sophisticated triggering options.  G2 devices are able to act as fiber optic loop controllers, so forming the heart of a larger system.</p>
   <p>Major device families:</p>
@@ -120,7 +112,5 @@
     <li><b>C-series</b> - Pulse discrimination and counting </li>
     <li><b>H-series</b> - Magnetic field probes</li>
   </ul>
-  <!-- InstanceEndEditable -->  
-</div>
 
-<%= link_to 'New Product', new_product_path %>
+</div>

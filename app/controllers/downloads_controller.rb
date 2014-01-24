@@ -1,11 +1,9 @@
 class DownloadsController < ApplicationController
   before_action :set_download, only: [:show, :edit, :update, :destroy]
+  before_action :signed_in_user, only: [:edit, :update, :destroy, :create]
 
   def index
     @downloads = Download.all
-  end
-
-  def show
   end
 
   def new
@@ -20,7 +18,7 @@ class DownloadsController < ApplicationController
     @download = Download.new(download_params)
     if @download.save
       flash[:notice] = "Successfully created download."
-      redirect_to @download
+      redirect_to downloads_url
     else
       render :action => 'new'
     end
@@ -29,7 +27,7 @@ class DownloadsController < ApplicationController
   def update
     if @download.update_attributes(download_params)
       flash[:notice] = "Successfully updated download."
-      redirect_to @download
+      redirect_to downloads_url
     else
       render :action => 'edit'
     end
