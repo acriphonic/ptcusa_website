@@ -1,35 +1,42 @@
+<style type="text/css">
+  h2 {
+    color: #FFF !important;;
+    }
+</style>
+
 <%= form_for(@product) do |f| %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
+  <h2>Product Name: <%= f.text_field :name %></h2>
 
-  <div class="field">
-    <%= f.label :picture %><br>
-    <%= f.text_field :picture %>
-  </div>
+  <p><strong>Category: <%= f.select :category, options_for_select(%w[BeamlineDiagnostic Communications&Control GeneralPurposeI/O CurrentMeasurement PulseAnalysis&Counting MagneticFieldMeasurement Accessories]) %></strong></p>
 
-  <div class="field">
-    <%= f.label :category %><br>
-		<%= f.select :category, options_for_select(%w[BeamlineDiagnostic Communications&Control GeneralPurposeI/O CurrentMeasurement PulseAnalysis&Counting MagneticFieldMeasurement Accessories]) %>
-  </div>
-
-  <%= f.fields_for :applications do |builder| %>
-    <% render "application_fields", f: builder %>
-  <% end %>
-  <%= link_to_add_fields "Add A Product Application", f, :applications %>
-	</br>
+  <p>Image file name: <%= f.text_field :picture %>
+  <br><i>Place the image file in app/assets/images/products/</i></p>
+  
+  
+  <h4>Features</h4>
+  <ul>
   <%= f.fields_for :features do |builder| %>
     <% render "feature_fields", f: builder %>
   <% end %>
   <%= link_to_add_fields "Add A Product Feature", f, :features %>
-	</br>
+  </ul>
+  
+  <h4>Applications</h4>
+  <ul>
+  <%= f.fields_for :applications do |builder| %>
+    <% render "application_fields", f: builder %>
+  <% end %>
+  <%= link_to_add_fields "Add A Product Application", f, :applications %>
+  </ul>
+	
+	<h4>Downloads</h4>
   <%= f.fields_for :resources do |builder| %>
     <% render "resource_fields", f: builder %>
   <% end %>
   <%= link_to_add_fields "Add A Downloadable File", f, :resources %>
-
+  
+  <br><br>
   <div class="actions">
     <%= f.submit %>
   </div>

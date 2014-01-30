@@ -40,13 +40,17 @@
             <table width="100%" border="1" cellpadding="2" cellspacing="2" bordercolor="#ccc">
             <tbody>
               <tr><td colspan="3"><%= simple_format(download.description) %></td></tr>
-              <tr>
-                <% for resource in download.resources %>
-                  <td>Name: <%= resource.name %></td>
-                  <td>Filepath: <%= resource.filepath%></td>
-                  <td>Version: <%= resource.version %></td>
-                <% end %>
-              </tr>
+              <% for resource in download.resources %>
+                <tr>
+                  <td><%= resource.name %></td>
+                  <% if resource.version == "" %>
+                    <td colspan="2"><%= resource.filepath %></td>
+                  <% else %>
+                    <td><%= resource.filepath %></td>
+                    <td>Version: <%= resource.version %></td>
+                  <% end %>
+                </tr>
+              <% end %>
             </tbody>
             </table>
               <% if signed_in? %><div class="align-right"><%= link_to 'Edit', edit_download_path(download) %> | <%= link_to 'Destroy', download, method: :delete, data: { confirm: 'Are you sure?' } %></div><% else %><br><% end %>

@@ -1,7 +1,2 @@
-<fieldset>
-	<%= f.label :description, "Product Feature" %>
-	<%= f.text_area :description %>
-	<%= f.hidden_field :_destroy %>
-	<%= link_to "remove", '#', class: "remove_fields" %>
-</fieldset>
+<li><%= f.text_field :description %><%= f.hidden_field :_destroy %> <%= link_to "remove", '#', class: "remove_fields" %></li>
 

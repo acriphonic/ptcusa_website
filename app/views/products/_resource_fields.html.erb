@@ -1,10 +1,3 @@
-<fieldset>
-	<%= f.label :name, "Downloadable File Name" %>
-	<%= f.text_field :name %>
-	<%= f.label :version, "Version" %>
-	<%= f.text_field :version %>
-	<%= f.label :filepath, "File Path" %>
-	<%= f.text_field :filepath %>
-	<%= f.hidden_field :_destroy %>
-	<%= link_to "remove", '#', class: "remove_fields" %>
-</fieldset>
+<p><%= f.label :name, "Description" %> <%= f.text_field :name %>
+<br><%= f.label :filepath, "File Path" %> <%= f.text_field :filepath %><%= f.hidden_field :_destroy %>
+<br><%= link_to "remove", '#', class: "remove_fields" %></p>

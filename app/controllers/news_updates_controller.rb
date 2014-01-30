@@ -3,7 +3,7 @@ class NewsUpdatesController < ApplicationController
   before_action :signed_in_user, only: [:edit, :update, :destroy, :create]
 
   def index
-    @news_updates = NewsUpdate.all
+    @news_updates = NewsUpdate.find(:all, :order=> "date DESC")
   end
 
   def new

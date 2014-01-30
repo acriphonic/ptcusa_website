@@ -18,7 +18,8 @@ h4 {
 	font-weight: normal;
 	font-size: 1.5em;
 	color:#fff; 
-	text-shadow:1px 0 0 rgb(0,0,0); 
+	text-shadow:1px 0 0 rgb(0,0,0);
+	margin-bottom: 0;
 }
 h5 {
 	font-family: 'Cabin', "Cabin", Helvetica, Arial, sans-serif;
@@ -159,9 +160,9 @@ img {
 	top: -20px;
 }
 .columnize {
-	-moz-column-count:2; /* Firefox */
-	-webkit-column-count:2; /* Safari and Chrome */
-	column-count:2;
+	-moz-column-count:3; /* Firefox */
+	-webkit-column-count:3; /* Safari and Chrome */
+	column-count:3;
 	column-gap:5px;
 	-moz-column-gap:5px; /* Firefox */
 	-webkit-column-gap:5px; /* Safari and Chrome */
@@ -696,7 +697,7 @@ ul.dropdown li.hover a              { color: black;}
 /* 
 	Sub Menu
 */
-ul.dropdown ul 						{ width: 230px; visibility: hidden; padding-left:0; text-align: left; left: 0px; position: absolute; background-image:url(/assets/bg-grid.png);}
+ul.dropdown ul 						{ width: 230px; visibility: hidden; padding-left:0; text-align: left; left: 0px; position: absolute; background-image:url(/assets/layout/bg-grid.png);}
 ul.dropdown ul li 					{ font-weight: normal; color: #000; 
 									  border-bottom: 1px solid #ccc; float: none; }
 									  
